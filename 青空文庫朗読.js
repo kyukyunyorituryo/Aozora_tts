@@ -5,10 +5,11 @@
 // -----------------------------------------------------------------------------
 var str = document.selection.Text;
 str = AozoraRuby(str);
+str = AozoraTag(str);
 var spkr = new ActiveXObject('SAPI.SpVoice');
-spkr.rate = 2; //読み上げ速度：大きいと速い
+spkr.rate = 1; //読み上げ速度：大きいと速い
 //alert(str);
-spkr.Speak(str);
+spkr.Speak(str,1);
 
 function AozoraRuby(str) {
 str = str.replace(/｜(.+?)《(.+?)》/mg, "$2");
@@ -20,6 +21,10 @@ str = str.replace(/｜(.+?)《(.+?)》/mg, "$2");
     str = str.replace(/([々仝〆〇ヶ\u3400-\u4DBF\u4E00-\u9FFF\uD840-\uD87F\uDC00-\uDFFF\uF900-\uFAFF]+?)《(.+?)》/mg, "$2");
     //アルファベットにふりがな
     str = str.replace(/([A-Za-z]+?)《(.+?)》/mgi, "$2");
+    return str;
+}
+function AozoraTag(str) {
+str = str.replace(/［＃(.+?)］/mg,"");
     return str;
 }
 /*
